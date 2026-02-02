@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, send_from_directory
 from flask_cors import CORS   # 👈 NUEVA LÍNEA
 import os
 from datetime import datetime
@@ -10,7 +10,7 @@ from openai import OpenAI
 # 🚀 Configuración base
 # ------------------------------
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", static_url_path="/static")
 CORS(app, resources={r"/*": {"origins": "*"}})  # 👈 Habilita CORS para todo
 
 # Cliente OpenAI
@@ -220,8 +220,16 @@ Contexto (titulares del día):
 # ------------------------------
 
 @app.route("/")
-def home():
+def serve_frontend():
+    # Sirve el archivo index.html que está en el mismo directorio que backend_dap.py
+    return send_from_directory(".", "index.html")
+
+
+@app.route("/health")
+def health():
+    # Ruta de salud para pruebas / monitoreo
     return jsonify({"status": "ok", "message": "Backend DAP MVP activo"})
+
 
 
 @app.route("/resumen_noticias", methods=["GET"])
