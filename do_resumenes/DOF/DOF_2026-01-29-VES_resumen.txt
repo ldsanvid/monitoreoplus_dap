@@ -1,0 +1,8 @@
+- Se reforma, adiciona y deroga diversas disposiciones de las Reglas para la determinación, acreditación y verificación del contenido nacional de bienes en procedimientos de contratación y obras públicas.  
+- Se establece un nuevo numeral 2.2.1. Bis. que define la "Bitácora" como un módulo de la Plataforma Digital de Contrataciones Públicas para el registro y seguimiento de contratos.  
+- Se modifica la fórmula para calcular el porcentaje de contenido nacional, considerando el costo neto de la mercancía y el valor de los materiales importados.  
+- Se especifican los costos directos e indirectos que se tomarán en cuenta para el cálculo del costo neto de los bienes ofertados.  
+- Se requiere que los licitantes presenten una manifestación de nacionalidad y del contenido nacional de los bienes ofertados en el formato del Anexo 1.  
+- Se establece que los adjudicatarios deben cargar información y documentación en la Bitácora, incluyendo la memoria de cálculo del contenido nacional y la estructura de costos.  
+- Se determinan plazos específicos para la carga de información en la Bitácora, dependiendo de la modalidad de entrega de los bienes.  
+- Se derogan ciertos numerales de las Reglas anteriores para actualizar y armonizar las disposiciones con la Ley de Adquisiciones y el Reglamento correspondiente.
