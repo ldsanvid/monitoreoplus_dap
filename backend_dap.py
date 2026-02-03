@@ -338,6 +338,9 @@ def construir_contexto_diarios_por_jurisdiccion(df_dia: pd.DataFrame) -> dict:
             if not ruta_rel:
                 continue
 
+            # 👇 Normalizar separadores tipo Windows -> separador del SO actual
+            ruta_rel = ruta_rel.replace("\\", os.sep)
+
             # Normalizamos la ruta tal como viene del CSV
             ruta_resumen = os.path.normpath(ruta_rel)
 
@@ -356,7 +359,6 @@ def construir_contexto_diarios_por_jurisdiccion(df_dia: pd.DataFrame) -> dict:
             except Exception as e:
                 print(f"⚠️ Error al leer resumen {ruta_resumen}: {e}")
 
-
         if not textos:
             continue
 
@@ -366,6 +368,7 @@ def construir_contexto_diarios_por_jurisdiccion(df_dia: pd.DataFrame) -> dict:
         contexto_por_jurisdiccion[jurisdiccion] = texto_concatenado
 
     return contexto_por_jurisdiccion
+
 
 
 def generar_resumen_diarios(fecha_str: str, jurisdiccion_filtro: str | None = None) -> dict:
@@ -1089,6 +1092,12 @@ def descargar_pdf():
     if not pdf_dir:
         return jsonify({"error": "El índice no tiene pdf_path para este documento"}), 500
 
+    # 👇 Normalizar separadores y colgarlo de BASE_DIR si es relativo
+    pdf_dir = pdf_dir.replace("\\", os.sep)
+    if not os.path.isabs(pdf_dir):
+        pdf_dir = os.path.join(BASE_DIR, pdf_dir)
+    pdf_dir = os.path.normpath(pdf_dir)
+
     ruta_pdf = os.path.join(pdf_dir, doc_id)
     ruta_pdf = os.path.normpath(ruta_pdf)
 
@@ -1104,6 +1113,7 @@ def descargar_pdf():
     except Exception as e:
         print("❌ Error al enviar PDF en /descargar_pdf:", repr(e))
         return jsonify({"error": "Error interno al enviar el PDF"}), 500
+
 
 
 @app.route("/resumen_do", methods=["POST"])
