@@ -409,7 +409,7 @@
       <h2>🤖 Chatbot</h2>
       <div class="controls">
         <input id="inputPregunta" type="text"
-               placeholder="Ej. ¿Qué se publicó en el DOF sobre casinos el 15 de enero?"/> 
+               placeholder="Ej. ¿Qué se publicó en la Gaceta de CDMX el 30 de enero?"/> 
         <button id="btnPreguntar" class="btn-primary">Consultar</button>
       </div>
       <div id="respuestaTexto" class="summary"></div>
@@ -495,7 +495,7 @@
     // ---------- UTILIDAD: RENDER TITULARES ----------
     function renderTitulares(list, target, tituloBloque) {
       if (!list || list.length === 0) {
-        target.innerHTML = '<em class="muted">No hay titulares disponibles</em>';
+        target.innerHTML = '<em class="muted">...</em>';
         return;
       }
 
@@ -826,7 +826,7 @@ async function cargarResumenDO() {
         if (titulares.length > 0) {
           renderTitulares(titulares, titularesPreguntaDiv, '');
         } else {
-          titularesPreguntaDiv.innerHTML = '<em class="muted">No se encontraron titulares para esta pregunta.</em>';
+          titularesPreguntaDiv.innerHTML = '<em class="muted">...</em>';
         }
 
       } catch (e) {
