@@ -24,6 +24,9 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 ORDEN_JURISDICCIONES = ["DOF", "SONORA", "VERACRUZ", "CDMX"]
 DO_INDEX_CSV = os.getenv("DO_INDEX_CSV", "do_index.csv")
 
+# Directorio base del proyecto (usado para armar rutas absolutas)
+BASE_DIR = os.path.dirname(os.path.abspath(DO_INDEX_CSV))
+
 # Ruta al CSV de noticias DAP
 NOTICIAS_DAP_CSV = os.getenv("NOTICIAS_DAP_CSV", "noticias_dap.csv")
 
@@ -331,10 +334,17 @@ def construir_contexto_diarios_por_jurisdiccion(df_dia: pd.DataFrame) -> dict:
     for jurisdiccion, group in df_dia.groupby("jurisdiccion"):
         textos = []
         for _, row in group.iterrows():
-            ruta_resumen = row["summary_path"].strip()
-            if not ruta_resumen:
+            ruta_rel = str(row.get("summary_path", "")).strip()
+            if not ruta_rel:
                 continue
-            ruta_resumen = os.path.normpath(ruta_resumen)
+
+            # Normalizamos la ruta tal como viene del CSV
+            ruta_resumen = os.path.normpath(ruta_rel)
+
+            # Si es relativa, la colgamos del directorio base del proyecto
+            if not os.path.isabs(ruta_resumen):
+                ruta_resumen = os.path.join(BASE_DIR, ruta_resumen)
+
             if not os.path.exists(ruta_resumen):
                 print(f"⚠️ No se encontró resumen: {ruta_resumen}")
                 continue
@@ -345,6 +355,7 @@ def construir_contexto_diarios_por_jurisdiccion(df_dia: pd.DataFrame) -> dict:
                     textos.append(txt)
             except Exception as e:
                 print(f"⚠️ Error al leer resumen {ruta_resumen}: {e}")
+
 
         if not textos:
             continue
