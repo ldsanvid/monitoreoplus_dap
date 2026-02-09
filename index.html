@@ -353,7 +353,6 @@
       <a href="#diarios">Diarios Oficiales</a>
       <a href="#descarga_diarios">Descarga</a>
       <a href="#preguntas">Chatbot</a>
-      <a href="#reporte">Reporte semanal</a>
       <a href="#dashboard_noticias">Dashboard</a>
     </nav>
   </header>
@@ -414,12 +413,6 @@
       </div>
       <div id="respuestaTexto" class="summary"></div>
       <div id="titularesPregunta" class="chips"></div>
-    </section>
-
-    <!-- 📑 REPORTE SEMANAL -->
-    <section id="reporte" class="card row" style="margin-top:18px">
-      <h2>📑 Reporte semanal</h2>
-      <div id="listaReportes" class="chips"></div>
     </section>
 
     <!-- 📈 DASHBOARD -->
@@ -833,39 +826,6 @@ async function cargarResumenDO() {
         console.error(e);
         respuestaTextoDiv.textContent = '❌ Error al procesar la pregunta.';
         titularesPreguntaDiv.innerHTML = '';
-      }
-    }
-
-    // ========== REPORTE SEMANAL ==========
-    async function cargarReportes() {
-      try {
-        var r = await fetch(API_BASE + '/reporte_semanal');
-        var data = await r.json();
-
-        if (!data || data.length === 0) {
-          listaReportesDiv.innerHTML = '<em class="muted">No hay reportes semanales disponibles todavía.</em>';
-          return;
-        }
-
-        listaReportesDiv.innerHTML = data.map(function(a) {
-          var nombre = a.nombre || 'Reporte semanal';
-          var url    = a.url || '';
-          return (
-            '<div class="chip">' +
-              '📄 <a href="' + API_BASE + url + '" target="_blank" rel="noopener noreferrer">' +
-                nombre +
-              '</a>' +
-              '<a href="' + API_BASE + url + '" download ' +
-                 'style="margin-left:10px; font-size:.9rem; color:var(--muted); text-decoration:none;">' +
-                 '📥 Descargar' +
-              '</a>' +
-            '</div>'
-          );
-        }).join('');
-
-      } catch (e) {
-        console.error(e);
-        listaReportesDiv.innerHTML = '<em class="muted">Error al cargar los reportes.</em>';
       }
     }
 

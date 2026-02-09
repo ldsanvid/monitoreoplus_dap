@@ -1172,17 +1172,6 @@ def resumen_do():
         "resumen": resultado.get("resumen", ""),
     }), 200
 
-@app.route("/reporte_semanal", methods=["GET"])
-def reporte_semanal():
-    """
-    Endpoint stub para el MVP de DAP.
-    Devuelve una lista (posiblemente vacía) de reportes semanales.
-    Más adelante podemos hacerlo que lea PDFs de una carpeta o de S3.
-    """
-    # Por ahora, devolver lista vacía para que el frontend muestre
-    # "No hay reportes semanales disponibles todavía."
-    return jsonify([]), 200
-
 @app.route("/pregunta", methods=["POST"])
 def pregunta():
     """
