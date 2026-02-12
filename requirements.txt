@@ -3,3 +3,5 @@ flask-cors
 pandas
 openai
 gunicorn
+feedparser
+requests
