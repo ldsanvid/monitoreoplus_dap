@@ -16,7 +16,7 @@ START_TIME = datetime.now(ZoneInfo("America/Mexico_City")).astimezone(timezone.u
 BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN_DAP")
 CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID_DAP_SALUD")  # o el nombre que prefieras
 
-CHECK_INTERVAL = int(os.environ.get("GOOGLE_NEWS_CHECK_INTERVAL", "120"))  # 2 min default
+CHECK_INTERVAL = int(os.environ.get("GOOGLE_NEWS_CHECK_INTERVAL", "60"))  # 1 min default
 
 # RSS del tema
 RSS_URL = os.environ.get("GOOGLE_NEWS_RSS_SARAMPION_MX")
@@ -87,7 +87,6 @@ def formatear_alerta(entry) -> str:
             dominio = ""
 
     partes = []
-    partes.append("🚨 *ALERTA DAP | Sarampión*")
     partes.append(f"📰 {titulo}")
     if medio:
         partes.append(f"🗞 {medio}")
@@ -150,7 +149,7 @@ def procesar_feed():
 
             from datetime import timedelta
 
-            limite = datetime.now(MX_TZ) - timedelta(hours=6)
+            limite = datetime.now(MX_TZ) - timedelta(hours=3)
             if fecha_cdmx < limite:
                 continue
 
@@ -190,4 +189,3 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"⚠️ Error en ciclo principal: {e}")
         time.sleep(CHECK_INTERVAL)
-
