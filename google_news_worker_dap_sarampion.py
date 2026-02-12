@@ -148,10 +148,12 @@ def procesar_feed():
             entry_date = fecha_cdmx.date()
 
 
-            if entry_date < hoy_cdmx:
+            from datetime import timedelta
+
+            limite = datetime.now(MX_TZ) - timedelta(hours=48)
+            if fecha_cdmx < limite:
                 continue
-            if fecha_utc < START_TIME:
-                continue
+
         except Exception as e:
             print(f"⚠️ No se pudo interpretar fecha: {e}")
             continue
