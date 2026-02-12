@@ -87,7 +87,7 @@ def formatear_alerta(entry) -> str:
             dominio = ""
 
     partes = []
-    partes.append("🚨 *ALERTA DAP | Sarampión (México)*")
+    partes.append("🚨 *ALERTA DAP | Sarampión*")
     partes.append(f"📰 {titulo}")
     if medio:
         partes.append(f"🗞 {medio}")
@@ -112,7 +112,7 @@ def procesar_feed():
         print("❌ Falta TELEGRAM_BOT_TOKEN_DAP o TELEGRAM_CHAT_ID_DAP_SALUD.")
         return
 
-    print("🔎 Revisando RSS Google News: sarampión + México…")
+    print("🔎 Revisando RSS Google News: sarampión (edición MX)…")
     feed = feedparser.parse(RSS_URL)
 
     if not getattr(feed, "entries", None):
