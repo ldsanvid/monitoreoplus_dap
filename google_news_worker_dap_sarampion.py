@@ -150,7 +150,7 @@ def procesar_feed():
 
             from datetime import timedelta
 
-            limite = datetime.now(MX_TZ) - timedelta(hours=48)
+            limite = datetime.now(MX_TZ) - timedelta(hours=6)
             if fecha_cdmx < limite:
                 continue
 
@@ -190,3 +190,4 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"⚠️ Error en ciclo principal: {e}")
         time.sleep(CHECK_INTERVAL)
+
